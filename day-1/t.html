@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="enter your name" id="data">
+    <button onclick="create()">create</button>
+    <table border="1" style="width: 50%;">
+    
+            <tr>
+                <td>id</td>
+                <td>name</td>
+                <td colspan="2">operations</td>
+                
+            </tr>
+
+           <tbody id="tbody">
+           
+               
+           </tbody>
+            
+       
+        
+    </table>
+
+    <script>    
+        let arr = []
+        let id = arr.length + 1;
+        function create(){
+    
+            let data = document.getElementById('data').value;
+            if(!data){
+                return
+                alert('input is empty')
+            }
+            let person = {id:id,name:data};
+            arr.push(person)
+            data = ''
+            id++
+            show()
+        }
+
+        function show(){
+            
+            
+            let element = document.getElementById('tbody');
+            element.innerHTML = ''
+           arr.map(item=>{
+            
+            
+            element.innerHTML   += `
+             <tr>
+                 <td>${item.id}</td>
+                <td>${item.name}</td>
+                 <td> <button onclick="edit(${item.id})">edit</button></td>
+                 <td> <button onclick="del(${item.id})">delete</button></td>
+             </tr>
+            `
+           })
+
+        }
+
+        function edit(id){
+            let data = prompt('enter the uodated name')
+
+            arr.map(item=>item.id == id ? item.name = data : item.name  = item.name)
+            show()
+        }
+
+
+        function del(id) {
+            console.log(id);
+            
+             arr =  arr.filter(item => item.id != id)
+            arr.map(item=> item.id > id ? --item.id:item.id =item.id)
+            
+            show()
+        }
+
+    </script>
+</body>
+
+</html>
