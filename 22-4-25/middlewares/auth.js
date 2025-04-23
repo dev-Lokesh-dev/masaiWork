@@ -8,7 +8,7 @@ export const authenticate = (req, res, next) => {
 
   const token = authHeader.split(' ')[1];
   if (token !== SECRET_TOKEN) {
-    return res.status(403).json({ message: 'Forbidden' });
+    return res.status(403).json({ message: 'wrong token' });
   }
 
   next();
